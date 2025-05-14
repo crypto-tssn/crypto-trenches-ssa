@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Trenches SSA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        .trench-label-name {
+          color: #1565c0 ; /* red neon */
+        }
+
+        .trench-label-title {
+          color: #1565c0 ; /* blue neon */
+        }
+
+        .trench-label-coin {
+          color: #1565c0 ; /* orange neon */
+        }
+
+        .trench-label-year {
+          color: #1565c0 ; /* green neon */
+        }
+
+        .trench-label-hashtag {
+          color: #1565c0 ; /* purple neon */
+        }
+
+        .trench-label-sig {
+          color: #1565c0 ; /* gold neon */
+        }
+
+        0%   { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+      }
+
+      .animate-marquee {
+        display: inline-block;
+        min-width: 100%;
+        animation: marquee 35s linear infinite;
+      }
+
+      body {
+        font-family: 'VT323', monospace;
+        background-color: #f5f6f5;
+        color: #333;
+        position: relative;
+        margin: 0;
+        padding: 0;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('logo.png') no-repeat center center;
+        background-size: 80%;
+        opacity: 0.05;
+        z-index: -1;
+      }
+      header {
+        background-color: #003087;
+        color: white;
+        padding: 0.25rem 1rem;
+      }
+      nav {
+        background-color: #005ea2;
+        padding: 0.5rem;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 1rem;
+        font-weight: bold;
+      }
+      nav a:hover {
+        text-decoration: underline;
+        text-shadow: 0 0 5px #00b7eb;
+      }
+      .card-container {
+        background: white;
+        padding: 2px;
+        border: 2px solid #003087;
+        border-radius: 10px;
+        position: relative;
+        width: 346px;
+        box-sizing: border-box;
+      }
+      .card-container::before,
+      .card-container::after {
+        content: "CRYPTO TRENCHES CRYPTO TRENCHES";
+        position: absolute;
+        font-family: Arial, sans-serif;
+        font-size: 6px;
+        color: #003087;
+        opacity: 0.5;
+        left: 20px;
+        right: 20px;
+        text-align: center;
+      }
+      .card-container::before {
+        top: 2px;
+      }
+      .card-container::after {
+        bottom: 2px;
+      }
+      #tssnCard {
+        width: 338px;
+        height: 212px;
+        background: #e6f2f7;
+        position: relative;
+        font-family: Arial, sans-serif;
+        box-sizing: border-box;
+        border: 2px solid #003087;
+        border-radius: 8px;
+        padding-bottom: 10px;
+      }
+      #tssnCard .banner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        z-index: 2;
+      }
+      #tssnCard .banner canvas {
+        position: absolute;
+        top: -7px;
+        left: 0;
+        width: 100%;
+        height: 41px;
+        z-index: 0;
+      }
+      #tssnCard .banner span {
+        display: block;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        line-height: 7px;
+        letter-spacing: 0.5px;
+        text-shadow: 1px 1px 1px #000;
+        z-index: 3;
+        position: relative;
+        top: 10px;
+      }
+      #tssnCard .bottom-pattern {
+        position: absolute;
+        bottom: -1px;
+        left: 0px;
+        width: 334px;
+        height: 10px;
+        z-index: 1;
+        background: repeating-linear-gradient(
+          45deg,
+          #003087,
+          #003087 2px,
+          transparent 2px,
+          transparent 4px
+        );
+      }
+      #tssnCard .bottom-pattern::before,
+      #tssnCard .bottom-pattern::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        background: #003087;
+      }
+      #tssnCard .bottom-pattern::before {
+        top: 5px;
+        height: 1px;
+      }
+      #tssnCard .bottom-pattern::after {
+        bottom: 0;
+        height: 10px;
+      }
+      #tssnCard .bottom-pattern span {
+        position: absolute;
+        top: 2px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        border-top: 1px dashed #003087;
+      }
+      #tssnCard .bottom-pattern microtext {
+        position: absolute;
+        top: -16px;
+        left: 0;
+        width: 100%;
+        font-family: Arial, sans-serif;
+        font-size: 6px;
+        color: #003087;
+        opacity: 0.5;
+        text-align: center;
+        white-space: nowrap;
+      }
+      #tssnCard .pillar {
+        position: absolute;
+        top: 0;
+        width: 20px;
+        height: 200px;
+        background: #003087;
+        z-index: 1;
+        overflow: hidden;
+      }
+      #tssnCard .pillar-left {
+        left: 0px;
+      }
+      #tssnCard .pillar-right {
+        right: 0px;
+      }
+      #tssnCard .pillar span {
+        position: absolute;
+        top: 34px;
+        width: 1px;
+        height: 174px;
+        background: white;
+      }
+      #tssnCard .pillar-left span:nth-child(1) { left: 2px; }
+      #tssnCard .pillar-left span:nth-child(2) { left: 4px; }
+      #tssnCard .pillar-left span:nth-child(3) { left: 6px; }
+      #tssnCard .pillar-left span:nth-child(4) { left: 8px; }
+      #tssnCard .pillar-left span:nth-child(5) { left: 10px; }
+      #tssnCard .pillar-left span:nth-child(6) { left: 12px; }
+      #tssnCard .pillar-left span:nth-child(7) { left: 14px; }
+      #tssnCard .pillar-right span:nth-child(1) { right: 2px; }
+      #tssnCard .pillar-right span:nth-child(2) { right: 4px; }
+      #tssnCard .pillar-right span:nth-child(3) { right: 6px; }
+      #tssnCard .pillar-right span:nth-child(4) { right: 8px; }
+      #tssnCard .pillar-right span:nth-child(5) { right: 10px; }
+      #tssnCard .pillar-right span:nth-child(6) { right: 12px; }
+      #tssnCard .pillar-right span:nth-child(7) { right: 14px; }
+      #tssnCard .pillar microtext {
+        position: absolute;
+        top: 50%;
+        left: 16px;
+        font-family: Arial, sans-serif;
+        font-size: 6px;
+        color: white;
+        opacity: 0.5;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: translateY(-50%);
+      }
+      #tssnCard .pillar::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 20px;
+        height: 2px;
+        background: #003087;
+        z-index: 2;
+      }
+      #tssnCard .watermark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        max-height: 90%;
+        opacity: 0.1;
+        object-fit: contain;
+        pointer-events: none;
+        z-index: 0;
+        background: transparent;
+        border: none;
+      }
+      #tssnCard .text-watermark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        color: #003087;
+        opacity: 0.05;
+        pointer-events: none;
+        text-align: center;
+        white-space: nowrap;
+        z-index: 0;
+      }
+      #tssnCard .text-watermark::before {
+        content: "CRYPTO TRENCHES CRYPTO TRENCHES";
+      }
+      #tssnCard .seal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 100px;
+        border: 1px dashed #003087;
+        border-radius: 50%;
+        opacity: 0.1;
+        z-index: 0;
+        font-family: Arial, sans-serif;
+        font-size: 6px;
+        color: #003087;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #tssnCard .seal::before {
+        content: "CRYPTO TRENCHES AUTHORITY · EST. 2025";
+        position: absolute;
+        top: -10px;
+        left: 0;
+        right: 0;
+        font-size: 6px;
+      }
+      #tssnCard .stamp,
+      #tssnCard .stamp-right {
+        position: absolute;
+        top: -2px;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        clip-path: circle(50%);
+        opacity: 1.0;
+        z-index: 4;
+      }
+      #tssnCard .stamp {
+        left: 3px;
+      }
+      #tssnCard .stamp-right {
+        right: 3px;
+        left: auto;
+      }
+      #tssnCard .content {
+        position: relative;
+        z-index: 1;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 35px 20px 0;
+        padding: 0 0 8px 0;
+      }
+      #tssnCard .content p {
+        margin: 3px 0;
+      }
+      #tssnCard .content p:first-child {
+        font-family: 'Courier New', monospace;
+        font-size: 18px;
+        font-weight: bold;
+        color: red;
+        letter-spacing: 2px;
+      }
+      #tssnCard .content p:nth-child(2) {
+        font-size: 14px;
+        font-weight: bold;
+        color: #005ea2;
+      }
+      #tssnCard .content p:nth-child(3) {
+        font-size: 10px;
+        color: #000;
+      }
+      #tssnCard .content p:nth-child(4) {
+        font-size: 10px;
+        color: #000;
+      }
+      #tssnCard .content p:nth-child(5) {
+        font-size: 10px;
+        color: #000;
+      }
+      #tssnCard .text-wrapper {
+        position: absolute;
+        bottom: 16px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 24px;
+        box-sizing: border-box;
+      }
+      #tssnCard .theme-text, .dead-coin-text {
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+        line-height: 1.4;
+        padding-bottom: 2px;
+        max-width: 110px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #005ea2;
+        font-weight: bold;
+      }
+      #tssnCard .dead-coin-text {
+        color: #ff4500;
+      }
+      #tssnCard .story-text {
+        font-family: Arial, sans-serif;
+        font-size: 7px;
+        line-height: 1.4;
+        color: #000;
+        white-space: normal;
+        overflow-wrap: break-word;
+        text-align: center;
+        margin: 2px 4px 6px 4px;
+        padding-bottom: 2px;
+      }
+      #tssnCard .signature-container {
+        position: absolute;
+        bottom: 22px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 3;
+      }
+      #tssnCard .signature-container img {
+        width: 100%;
+        max-height: 15px;
+        object-fit: contain;
+        margin-bottom: -3px;
+      }
+      #tssnCard .signature-label {
+        font-family: Arial, sans-serif;
+        font-size: 8px;
+        color: #555;
+        text-align: center;
+        margin-top: 2px;
+      }
+      #signatureCanvas {
+        border: 1px solid #003087;
+        width: 100%;
+        height: 50px;
+        background: #f9f9f9;
+        touch-action: none;
+        cursor: crosshair;
+      }
+      #renderCanvas {
+        display: none;
+      }
+      .error {
+        border-color: #dc3545;
+      }
+      .loading::after {
+        content: " ...";
+        animation: dots 1s infinite;
+      }
+      @keyframes dots {
+        0% { content: " ."; }
+        33% { content: " .."; }
+        66% { content: " ..."; }
+      }
+      .main-logo {
+        width: 120px;
+        height: 120px;
+      }
+      @media (max-width: 640px) {
+        .main-logo {
+          width: 80px;
+          height: 80px;
+        }
+      }
+      .requirements-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .requirements-list li {
+        position: relative;
+        padding-left: 1.5em;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        line-height: 1.25rem;
+      }
+      .requirements-list li::before {
+        content: "🚀";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1em;
+        height: 1em;
+        line-height: 1em;
+        text-align: center;
+      }
+      .requirements-list li.color-1 { color: #ff1493; }
+      .requirements-list li.color-1::before { color: #ff1493; }
+      .requirements-list li.color-2 { color: #00b7eb; }
+      .requirements-list li.color-2::before { color: #00b7eb; }
+      .requirements-list li.color-3 { color: #ff4500; }
+      .requirements-list li.color-3::before { color: #ff4500; }
+      .requirements-list li.color-4 { color: #ffd700; }
+      .requirements-list li.color-4::before { color: #ffd700; }
+      .requirements-list li.color-5 { color: #39ff14; }
+      .requirements-list li.color-5::before { color: #39ff14; }
+      .requirements-list li.color-6 { color: #ff69b4; }
+      .requirements-list li.color-6::before { color: #ff69b4; }
+      .requirements-list li.color-7 { color: #00ffff; }
+      .requirements-list li.color-7::before { color: #00ffff; }
+      .requirements-list li.color-8 { color: #ff6347; }
+      .requirements-list li.color-8::before { color: #ff6347; }
+      @keyframes scrollTicker {
+        0% { transform: translateX(10%); }
+        100% { transform: translateX(-100%); }
+      }
+      #tickerWrapper {
+        overflow: hidden;
+        relative h-10 bg-[#FFF3CD] border-t border-b border-[#00cc00] flex items-center;
+      }
+      #tickerContent {
+        display: flex;
+        align-items: center;
+        gap: 30rem;
+        animation: scrollTicker 60s linear infinite;
+        will-change: transform;
+      }
+      .ticker-item {
+        flex-shrink: 0;
+        white-space: nowrap;
+        font-weight: bold;
+        color: #ff00ff;
+        font-size: 16px;
+      }
+      @media (max-width: 640px) {
+        #tickerContent {
+          animation-duration: 120s;
+        }
+      }
+      #generateBtn, #downloadBtn {
+        background: #00cc00;
+        border: 1px solid #000000;
+        transition: background 0.3s, text-shadow 0.3s;
+      }
+      #generateBtn:hover, #downloadBtn:hover {
+        background: #33cc33;
+        text-shadow: 0 0 5px #00b7eb;
+      }
+      #resetBtn {
+        background: #ff0000;
+        border: 1px solid #000000;
+        transition: background 0.3s, text-shadow 0.3s;
+      }
+      #resetBtn:hover {
+        background: #cc0000;
+        text-shadow: 0 0 5px #00b7eb;
+      }
+      #postXBtn {
+        background: #00b7eb;
+        transition: background 0.3s, text-shadow 0.3s;
+      }
+      #postXBtn:hover {
+        background: #00a1d6;
+        text-shadow: 0 0 5px #00cc00;
+      }
+      <style>
+/* Trenchify Glow Texts for TSSN Card */
+.tssn-banner {
+  color: white;
+  text-shadow: 0 0 5px #00b7eb, 0 0 10px #00b7eb;
+}
+
+.tssn-ssn {
+  color: #ff4d4d;
+  font-weight: bold;
+  text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d;
+}
+
+.tssn-nickname {
+  color: #00b7eb;
+  font-weight: bold;
+  text-shadow: 0 0 5px #00b7eb, 0 0 10px #00b7eb;
+}
+
+.tssn-title {
+  color: #00cc00;
+  font-weight: bold;
+  text-shadow: 0 0 5px #00cc00, 0 0 10px #00cc00;
+}
+
+.tssn-year {
+  color: #ff9900;
+  font-weight: bold;
+  text-shadow: 0 0 5px #ff9900, 0 0 10px #ff9900;
+}
+
+.tssn-rank {
+  color: #cc00ff;
+  font-weight: bold;
+  text-shadow: 0 0 5px #cc00ff, 0 0 10px #cc00ff;
+}
+
+.tssn-story {
+  color: #ffd700;
+  font-weight: bold;
+  text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700;
+}
+</style>
+
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <header>
+        <div class="max-w-7xl mx-auto flex flex-col items-center">
+            <a href="/" id="homeLink">
+                <img src="logo.png" alt="Logo" class="main-logo" loading="lazy">
+            </a>
+            <div class="flex flex-col items-center mt-1">
+                <h1 class="text-2xl font-bold text-center">CRYPTO TRENCHES SOCIAL SECURITY ADMINISTRATION</h1>
+                <div class="text-base mt-1">Official Crypto Trench Authority 🚀</div>
+            </div>
+        </div>
+    </header>
+
+    <div id="tickerWrapper" class="overflow-hidden relative h-10 bg-[#FFF3CD] border-t border-b border-[#00cc00] flex items-center">
+        <div id="tickerContent" class="flex gap-10 whitespace-nowrap"></div>
+    </div>
+
+    <nav class="text-white">
+        <div class="max-w-7xl mx-auto">
+            <a href="#" id="btnEN">English</a>
+            <a href="#" id="btnES">Español</a>
+            <a href="#" id="btnZH">中文</a>
+        </div>
+    </nav>
+    <main class="max-w-7xl mx-auto flex flex-col lg:flex-row p-8 gap-8 flex-1">
+        <section class="flex-1 bg-white p-3 shadow-md border-t-4 border-[#003087]">
+            <h1 id="applyTitle" class="text-2xl font-bold mb-4 text-[#003087]">MINT YOUR DEGEN TSSN 🚀</h1>
+            <h2 id="requirementsTitle" class="text-xl font-semibold mb-2 text-[#003087]">Eligibility Requirements</h2>
+            <div id="requirementsList" class="grid lg:grid-cols-2 gap-2 mb-1"></div>
+            <form id="tssnForm" class="grid lg:grid-cols-2 gap-1">
+                <div>
+                    <label for="nickname" class="block text-base font-medium trench-label-name">
+                      Name / Degen Handle <span class="text-red-500">*</span>
+                    </label>
+                    <input id="nickname" placeholder="Enter degen handle (max 20)" class="mt-1 block w-full border p-2" required maxlength="20">
+                </div>
+                <div>
+                    <label for="title" class="block text-base font-medium trench-label-title">
+                      Title / Crypto Flex (max 30)
+                    </label>
+                    <input id="title" placeholder="Enter crypto flex" class="mt-1 block w-full border p-2" maxlength="30">
+                </div>
+                <div>
+                    <label for="deadCoin" class="block text-base font-medium trench-label-coin">
+                      Rekt Coin (max 15)
+                    </label>
+                    <input id="deadCoin" placeholder="Enter rekt coin" class="mt-1 block w-full border p-2" maxlength="15">
+                </div>
+                <div>
+                    <label for="yearEntered" class="block text-base font-medium trench-label-year">
+                      When U Got Rekt <span class="text-red-500">*</span>
+                    </label>
+                    <select id="yearEntered" class="mt-1 block w-full border p-2" required>
+                        <option value="">Select Year</option>
+                        <option>2010</option><option>2011</option><option>2012</option><option>2013</option><option>2014</option>
+                        <option>2015</option><option>2016</option><option>2017</option><option>2018</option><option>2019</option>
+                        <option>2020</option><option>2021</option><option>2022</option><option>2023</option><option>2024</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="hashtag" class="block text-base font-medium trench-label-hashtag">
+                      Shill Hashtag
+                    </label>
+                    <input id="hashtag" placeholder="Enter or use default viral tag" maxlength="20" class="mt-1 block w-full border p-2">
+                </div>
+                <div class="lg:col-span-2">
+                    <label for="signatureCanvas" class="block text-base font-medium trench-label-sig">
+                      Signature / Degen Scribble
+                    </label>
+                    <canvas id="signatureCanvas" width="300" height="50" class="mt-1 block w-full"></canvas>
+                    <button type="button" id="clearSignature" class="mt-2 text-base text-[#00b7eb] hover:underline">Clear Scribble</button>
+                </div>
+                <div class="lg:col-span-2 flex gap-4">
+                    <button type="submit" id="generateBtn" class="text-white py-2 px-4 rounded">MINT TSSN..FRL..LFG !!</button>
+                    <button type="button" id="resetBtn" class="text-white py-2 px-4 rounded">RUGPULL FORM</button>
+                </div>
+            </form>
+        </section>
+        <section id="cardSection" class="flex-1 hidden items-center justify-center">
+            <div class="card-container">
+                <div id="tssnCard">
+                    <div class="banner">
+                        <span class="tssn-banner">CRYPTO TRENCHES SOCIAL SECURITY</span>
+
+                        <canvas class="banner-curve"></canvas>
+                    </div>
+                    <div class="pillar pillar-left">
+                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                        <microtext>CRYPTO TRENCHES</microtext>
+                    </div>
+                    <div class="pillar pillar-right">
+                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                        <microtext>CRYPTO TRENCHES</microtext>
+                    </div>
+                    <div class="bottom-pattern">
+                        <microtext>CRYPTO TRENCHES</microtext>
+                    </div>
+                    <img src="logo.png" alt="Watermark" class="watermark" loading="lazy" crossOrigin="anonymous">
+                    <div class="text-watermark"></div>
+                    <div class="seal"></div>
+                    <img src="logo.png" alt="Stamp Left" class="stamp" loading="lazy" crossOrigin="anonymous">
+                    <img src="logo.png" alt="Stamp Right" class="stamp stamp-right" loading="lazy" crossOrigin="anonymous">
+                    <div class="content"></div>
+                    <div class="text-wrapper">
+                        <div class="dead-coin-text">DOGE2.0</div>
+                        <div class="theme-text">SHIBA CHASER</div>
+                    </div>
+                    <div class="signature-container">
+                        <img id="cardSignatureImage" src="" alt="Signature">
+                        <div class="signature-label">Authorized Signature</div>
+                    </div>
+                </div>
+            </div>
+            <canvas id="renderCanvas" width="1360" height="856"></canvas>
+            <div class="mt-4 flex flex-col gap-2 items-start">
+              <div class="flex gap-4">
+                <button id="downloadBtn" class="text-white py-2 px-4 rounded">SAVE MY REKT TSSN</button>
+                <button id="postXBtn" class="text-white py-2 px-4 rounded flex items-center">
+                    SHILL ON <span class="ml-1">𝕏</span> 🚀
+                </button>
+              </div>
+              <p class="text-sm text-[#ff00ff] italic mt-1">
+                💾 Save Your TSSN and Attach it in your tweet to shill and flex max degen vibes on CT 🚀
+              </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#003087] text-white text-center p-4">
+        <p>© 2025 Crypto Trenches Authority - All Rights Rekt</p>
+        <p class="text-base">An Official Degen Site of The Crypto Trenches</p>
+        <p class="text-sm text-red-400 mt-2 italic">
+            ⚠️ This is a parody site. We ain’t no gov or real SSN. Pure degen satire for LFG vibes only.
+        </p>
+    </footer>
+
+    <script>
+        const viralHashtags = [
+          "#WAGMI", "#REKT", "#LFG", "#NGMI", "#BTCTotheMoon", "#DEGEN", "#HODL",
+          "#FUD", "#PumpIt", "#DiamondHands", "#PaperHands", "#CryptoFam",
+          "#ShillZone", "#SatoshiLives", "#BuyTheDip", "#CryptoWinter", "#Rugged",
+          "#AltSeason", "#DegenNation", "#AirdropHunter", "#GasWars", "#MintNow",
+          "#MoonMission", "#CryptoMemes", "#BSCGem", "#SolanaGang", "#ETHGang",
+          "#BearMarketVibes", "#LaunchpadDegen", "#TokenSniper", "#FOMO", "#WhaleAlert",
+          "#NoRug", "#LUNAClassic", "#ZeroToHero", "#ApeIn", "#100xGains", "#WenLambo",
+          "#WenUtility", "#LiquidityTrap", "#CTVibes", "#StakingRewards", "#KYCFail",
+          "#DEXMaxi", "#RektClub", "#DegenLabs", "#TSSN", "#CryptoTrenches", "#Memecoin",
+          "#BuyHighSellLow", "#SniperEntry", "#BagHolder", "#Tokenomics", "#BTCMaxi",
+          "#ShillHarder", "#MoonboySeason", "#YieldFarmer", "#AIcoin", "#MemeKing",
+          "#LiquidityDegen", "#GasFeesSuck", "#UniswapLife", "#Ser", "#GmCrypto",
+          "#DegenAlert", "#FakeUtility", "#RektOnLaunch", "#DoxxedTeam", "#ScamSniffer",
+          "#BurnMechanism", "#ATHsoon", "#CTAlpha", "#CryptoTwitter", "#BinanceBaby",
+          "#ElonTweeted", "#PumpSignal", "#FloorPrice", "#NFTUtility", "#CTClown",
+          "#WenSnapshot", "#SnapshotSoon", "#InCryptoWeTrust", "#NotFinancialAdvice",
+          "#DeFiLife", "#MemesOverMoney", "#PepeArmy", "#WojakBag", "#DiamondBagz",
+          "#DeadCoin", "#SnipeTheDip", "#NextShiba", "#PoocoinChart", "#DegenerateDAO",
+          "#CrypToTheTop", "#Hopium", "#RedCandleLife", "#ExitLiquidity", "#TGEsoon"
+        ];
+
+        const hashtagInput = document.getElementById("hashtag");
+        hashtagInput.value = viralHashtags[Math.floor(Math.random() * viralHashtags.length)];
+
+
+        // Draw banner curve on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            const bannerCanvas = document.querySelector("#tssnCard .banner-curve");
+            if (bannerCanvas) {
+                bannerCanvas.width = 338;
+                bannerCanvas.height = 41;
+                const ctx = bannerCanvas.getContext("2d");
+                ctx.fillStyle = "#003087";
+                ctx.beginPath();
+                ctx.moveTo(20, 40);
+                ctx.quadraticCurveTo(169, 30, 318, 40);
+                ctx.lineTo(318, 6);
+                ctx.lineTo(20, 6);
+                ctx.closePath();
+                ctx.fill();
+                console.log('Banner curve drawn: width=338, height=41, arc from y=40 (x=20,318) to y=30 (x=169), sides to y=6');
+            }
+        });
+
+        // Language translations
+        const translations = {
+            en: {
+                applyTitle: "APPLY FOR YOUR TRENCHES SSN 🚀",
+                requirementsTitle: "Eligibility Requirements",
+                requirementsList: [
+                    [
+                        "Survived 3+ rugpulls, still NGMI",
+                        "Bought $SHIB at ATH, sold at ATL",
+                        "HODLed $LUNA to $0, diamond hands",
+                        "Shilled 69 Telegram pumps, got banned"
+                    ],
+                    [
+                        "Lived on ramen for 1 bear market",
+                        "Yelled 'WAGMI' during a 90% dip",
+                        "Lost 1 ETH to gas fees, cried",
+                        "Owns 420 NFTs worth $0 now"
+                    ]
+                ],
+            },
+            es: {
+                applyTitle: "MINTEA TU TSSN DEGEN 🚀",
+                requirementsTitle: "Requisitos de Elegibilidad",
+                requirementsList: [
+                    [
+                        "Sobrevivió 3+ rugpulls, aún NGMI",
+                        "Compró $SHIB en ATH, vendió en ATL",
+                        "HODLeó $LUNA a $0, manos de diamante",
+                        "Shilleó 69 pumps en Telegram, baneado"
+                    ],
+                    [
+                        "Vivió de ramen en un mercado bajista",
+                        "Gritó 'WAGMI' en una caída del 90%",
+                        "Perdió 1 ETH en gas, lloró",
+                        "Tiene 420 NFTs que valen $0"
+                    ]
+                ],
+            },
+            zh: {
+                applyTitle: "铸造你的DEGEN TSSN 🚀",
+                requirementsTitle: "资格要求",
+                requirementsList: [
+                    [
+                        "经历了3次以上rugpull，仍NGMI",
+                        "在ATH买$SHIB，ATL卖出",
+                        "HODL $LUNA到$0，钻石手",
+                        "在Telegram shill了69次，被禁"
+                    ],
+                    [
+                        "在熊市吃了一年后拉面",
+                        "在90%下跌时喊'WAGMI'",
+                        "因gas费损失1 ETH，泪流",
+                        "拥有420个价值$0的NFT"
+                    ]
+                ],
+            },
+        };
+
+        // Random data pools
+        const randomTitles = [
+            "Degen Survivor", "Meme Coin Shiller", "Rugpull Degen", "HODL Chad",
+            "Pump & Dump King", "Discord Degen", "Ramen Lord", "Moonshot Bro",
+        ];
+        const randomDeadCoins = [
+            "Terra (LUNA)", "BitConnect (BCC)", "SafeMoon (SFM)", "OneCoin",
+            "FTX Token (FTT)", "Squid Game (SQUID)", "TITAN", "DOGE2.0",
+            "PayCoin (XPY)", "Auroracoin (AUR)", "NanoHealthCare",
+            "GetGems (GEMZ)", "BoringCoin", "DAO (The DAO)", "NuruCoin"
+        ];
+
+        // Static dictionary of themes and stories
+        const memeThemes = {
+            "HODL Zero": "HODLed {coin} to $0, diamond hands.",
+            "Rug Survivor": "{coin} rugged me, trust no one.",
+            "Lambo Dreamer": "Bought {coin} for Lambo, got bike.",
+            "FOMO Peak": "FOMO’d {coin} at top, now rekt.",
+            "Bitconnect Hype": "Shilled {coin}, where’s my yacht?",
+            "Mt Gox Loser": "Lost {coin} in hack, still sad.",
+            "Elon Pumper": "{coin} spiked on tweet, I’m broke.",
+            "Luna Defender": "Said {coin} was safe, my bad.",
+            "Doge Recruit": "Tipped {coin}, moon didn’t come.",
+            "NGMI Doomer": "Bet on {coin}, NGMI confirmed.",
+            "WAGMI Hopium": "{coin} dip? WAGMI, right?",
+            "TG Scammer": "Ran {coin} scam, banned again.",
+            "Discord Degen": "Shilled {coin} in 50 servers, rekt.",
+            "Whale Pumper": "Pumped {coin}, dumped on noobs.",
+            "Vitalik Dev": "Built {coin} dApp, gas ate me.",
+            "Satoshi Purist": "{coin} ain’t BTC, I’m out.",
+            "ICO Bagholder": "{coin} ICO was future, nope.",
+            "Ramen HODLer": "All in {coin}, eating noodles.",
+            "Bro Shiller": "Hyped {coin}, rug pulled me.",
+            "Exit Pawn": "Held {coin}, whales cashed out.",
+            "Paper Hands": "Sold {coin} dip, it mooned.",
+            "Diamond Myth": "{coin} crashed, hands broke.",
+            "Gas Loser": "Swapped {coin}, gas took all.",
+            "Meme Gambler": "{coin} 100x? Lost my rent.",
+            "Silk Road Oldie": "Spent {coin} on darknet, oof.",
+            "BTC Maxi": "{coin} scam, BTC is king.",
+            "Ponzi Pusher": "Pushed {coin}, now hiding.",
+            "Yield Degen": "Farmed {coin}, got drained.",
+            "Airdrop Chaser": "Chased {coin} drop, got dust.",
+            "Crash Casualty": "{coin} tanked in 5 mins, rekt.",
+            "CT Guru": "Predicted {coin} moon, wrong.",
+            "Altseason Hope": "{coin} was next ETH, lol.",
+            "Leverage King": "100x {coin}, liquidated.",
+            "Stable Skeptic": "{coin} peg broke, I knew it.",
+            "NFT Flipper": "Minted {coin} NFT, worthless.",
+            "Shiba Chaser": "{coin} wasn’t Doge, oops.",
+            "Hackathon Nerd": "Coded {coin} app, rug pulled.",
+            "Fork Frenzy": "Chose {coin} fork, it died.",
+            "DAO Fiasco": "Voted {coin} DAO, funds gone.",
+            "CeFi Sucker": "Lent {coin} to CEX, locked.",
+            "DeFi Yielder": "Staked {coin}, slashed.",
+            "Chart Prophet": "Charted {coin}, still rekt.",
+            "Wen Moon": "Asked wen {coin} moon, never.",
+            "Tether Truther": "{coin} backed by air, told ya.",
+            "Chain Preacher": "{coin} fixes all, it didn’t.",
+            "Scam Spotter": "Called {coin} scam, too late.",
+            "Moonboy Meme": "{coin} to $1M? Try $0.",
+            "Bear Grizzly": "Short {coin}, made bank.",
+            "Bull Bandwagon": "FOMO’d {coin}, crashed.",
+            "Mom Shiller": "Mom bought {coin}, I’m broke."
+        };
+
+        // DOM elements
+        const form = document.getElementById("tssnForm");
+        const cardSection = document.getElementById("cardSection");
+        const card = document.getElementById("tssnCard");
+        const cardContent = card.querySelector(".content");
+        const themeText = card.querySelector(".theme-text");
+        const deadCoinText = card.querySelector(".dead-coin-text");
+        const cardSignatureImage = card.querySelector("#cardSignatureImage");
+        const generateBtn = document.getElementById("generateBtn");
+        const downloadBtn = document.getElementById("downloadBtn");
+        const postXBtn = document.getElementById("postXBtn");
+        const resetBtn = document.getElementById("resetBtn");
+        const homeLink = document.getElementById("homeLink");
+        const signatureCanvas = document.getElementById("signatureCanvas");
+        const clearSignatureBtn = document.getElementById("clearSignature");
+        const renderCanvas = document.getElementById("renderCanvas");
+
+        // Signature canvas setup
+        const ctx = signatureCanvas.getContext("2d");
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        // Initialize canvas context
+        ctx.strokeStyle = "#003087";
+        ctx.lineWidth = 2;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+
+        function getMousePos(canvas, evt) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            let clientX, clientY;
+            if (evt.touches && evt.touches.length > 0) {
+                clientX = evt.touches[0].clientX;
+                clientY = evt.touches[0].clientY;
+            } else {
+                clientX = evt.clientX;
+                clientY = evt.clientY;
+            }
+            return {
+                x: (clientX - rect.left) * scaleX,
+                y: (clientY - rect.top) * scaleY
+            };
+        }
+
+        function startDrawing(e) {
+            e.preventDefault();
+            isDrawing = true;
+            const pos = getMousePos(signatureCanvas, e);
+            lastX = pos.x;
+            lastY = pos.y;
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            console.log(`Start drawing at (${lastX}, ${lastY})`);
+        }
+
+        function draw(e) {
+            e.preventDefault();
+            if (!isDrawing) return;
+            const pos = getMousePos(signatureCanvas, e);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+            lastX = pos.x;
+            lastY = pos.y;
+            console.log(`Drawing to (${lastX}, ${lastY})`);
+        }
+
+        function stopDrawing(e) {
+            e.preventDefault();
+            isDrawing = false;
+            ctx.beginPath();
+            console.log("Stop drawing");
+        }
+
+        // Add event listeners
+        signatureCanvas.addEventListener("mousedown", startDrawing);
+        signatureCanvas.addEventListener("mousemove", draw);
+        signatureCanvas.addEventListener("mouseup", stopDrawing);
+        signatureCanvas.addEventListener("mouseout", stopDrawing);
+        signatureCanvas.addEventListener("touchstart", (e) => {
+            e.preventDefault();
+            startDrawing(e);
+        });
+        signatureCanvas.addEventListener("touchmove", (e) => {
+            e.preventDefault();
+            draw(e);
+        });
+        signatureCanvas.addEventListener("touchend", stopDrawing);
+        signatureCanvas.addEventListener("touchcancel", stopDrawing);
+
+        clearSignatureBtn.addEventListener("click", () => {
+            ctx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+            console.log("Signature cleared");
+        });
+
+        function getRandomItem(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        function getRandomTheme() {
+            const themes = Object.keys(memeThemes);
+            const theme = getRandomItem(themes);
+            if (theme.length > 15) {
+                console.warn(`Theme "${theme}" exceeds 15 chars; truncating`);
+                return theme.slice(0, 15);
+            }
+            return theme;
+        }
+
+        function updateLanguage(lang) {
+            const t = translations[lang];
+            document.getElementById("applyTitle").textContent = t.applyTitle;
+            document.getElementById("requirementsTitle").textContent = t.requirementsTitle;
+            const listContainer = document.getElementById("requirementsList");
+            listContainer.innerHTML = "";
+            const colors = ['color-1', 'color-2', 'color-3', 'color-4', 'color-5', 'color-6', 'color-7', 'color-8'];
+            t.requirementsList.forEach((columnItems) => {
+                const ul = document.createElement("ul");
+                ul.className = "requirements-list";
+                columnItems.forEach((item, index) => {
+                    const li = document.createElement("li");
+                    li.className = colors[index % colors.length];
+                    li.textContent = item;
+                    ul.appendChild(li);
+                });
+                listContainer.appendChild(ul);
+            });
+        }
+
+        document.getElementById("btnEN").addEventListener("click", () => updateLanguage("en"));
+        document.getElementById("btnES").addEventListener("click", () => updateLanguage("es"));
+        document.getElementById("btnZH").addEventListener("click", () => updateLanguage("zh"));
+
+        homeLink.addEventListener("click", function (e) {
+            e.preventDefault();
+            window.location.reload();
+        });
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const nickname = document.getElementById("nickname");
+            const titleInput = document.getElementById("title").value.trim();
+            const deadCoinInput = document.getElementById("deadCoin").value.trim();
+            const yearEntered = document.getElementById("yearEntered");
+            const hashtag = document.getElementById("hashtag").value;
+
+            // Validate character limits
+            let isValid = true;
+            const inputs = [
+                { el: nickname, max: 20, required: true },
+                { el: document.getElementById("title"), max: 30, required: false },
+                { el: document.getElementById("deadCoin"), max: 15, required: false },
+                { el: yearEntered, max: 4, required: true }
+            ];
+
+            inputs.forEach(({ el, max, required }) => {
+                el.classList.remove("error");
+                const value = el.value.trim();
+                if (required && !value) {
+                    el.classList.add("error");
+                    isValid = false;
+                } else if (value && value.length > max) {
+                    el.classList.add("error");
+                    isValid = false;
+                }
+            });
+
+            if (!isValid) {
+                alert("Fill required fields (*) and keep inputs under character limits, degen!");
+                return;
+            }
+
+            const title = titleInput || getRandomItem(randomTitles);
+            const deadCoin = deadCoinInput || getRandomItem(randomDeadCoins);
+            const theme = getRandomTheme();
+            const storyTemplate = memeThemes[theme];
+            const story = `${storyTemplate.replace("{coin}", deadCoin).slice(0, 35)} ${hashtag}`.slice(0, 40);
+
+            generateBtn.disabled = true;
+            generateBtn.classList.add("loading");
+            generateBtn.textContent = "Minting";
+
+            const tssn = Math.floor(100000000 + Math.random() * 900000000).toString().replace(/(\d{3})(\d{2})(\d{4})/, "$1-$2-$3");
+
+            console.log('Form data:', { tssn, nickname: nickname.value, title, deadCoin, yearEntered: yearEntered.value, theme, story });
+
+            themeText.textContent = theme.toUpperCase();
+            deadCoinText.textContent = deadCoin.toUpperCase();
+            cardContent.innerHTML = `
+    <p class="tssn-ssn">${tssn}</p>
+    <p class="tssn-nickname">${nickname.value.toUpperCase()}</p>
+    <p class="tssn-title">${title.toUpperCase()}</p>
+    <p class="tssn-year">YEAR: ${yearEntered.value}</p>
+    <p class="tssn-rank">RANK: ${theme.toUpperCase()}</p>
+    <p class="story-text tssn-story">${story.toUpperCase()}</p>
+`;
+
+
+
+            const signatureDataUrl = signatureCanvas.toDataURL("image/png");
+            console.log("Signature data URL generated");
+            cardSignatureImage.src = signatureDataUrl;
+            cardSignatureImage.onerror = () => {
+                console.error('Signature image failed to load');
+                alert("Failed to load degen scribble. Draw again, bro!");
+            };
+
+            setTimeout(() => {
+                cardSection.classList.remove("hidden");
+                generateBtn.disabled = false;
+                generateBtn.classList.remove("loading");
+                generateBtn.textContent = "MINT TSSN LFG";
+            }, 500);
+        });
+
+        downloadBtn.addEventListener("click", function () {
+            downloadBtn.disabled = true;
+            downloadBtn.classList.add("loading");
+            downloadBtn.textContent = "Saving";
+
+            html2canvas(document.querySelector(".card-container"), {
+                scale: 4,
+                useCORS: true,
+                backgroundColor: "#ffffff",
+                windowWidth: 346,
+                windowHeight: 212,
+                onclone: (clonedDoc) => {
+                    const clonedCard = clonedDoc.querySelector("#tssnCard");
+                    clonedCard.querySelector(".banner").style.zIndex = "2";
+                    clonedCard.querySelectorAll(".pillar").forEach(p => p.style.zIndex = "1");
+                    clonedCard.querySelector(".watermark").style.zIndex = "0";
+                    clonedCard.querySelector(".text-watermark").style.zIndex = "0";
+                    clonedCard.querySelector(".seal").style.zIndex = "0";
+                    clonedCard.querySelector(".stamp").style.zIndex = "4";
+                    clonedCard.querySelector(".stamp-right").style.zIndex = "4";
+                    clonedCard.querySelector(".content").style.zIndex = "1";
+                    clonedCard.querySelector(".text-wrapper").style.zIndex = "1";
+                    clonedCard.querySelector(".signature-container").style.zIndex = "3";
+                }
+            }).then((canvas) => {
+                const link = document.createElement("a");
+                link.download = "tssn_degen_pass.png";
+                link.href = canvas.toDataURL("image/png", 1.0);
+                link.click();
+
+                downloadBtn.disabled = false;
+                downloadBtn.classList.remove("loading");
+                downloadBtn.textContent = "DOWNLOAD MY TSSN CARD";
+            }).catch((error) => {
+                console.error("Failed to generate card:", error);
+                alert("Failed to save rekt pass. Try again, degen!");
+                downloadBtn.disabled = false;
+                downloadBtn.classList.remove("loading");
+                downloadBtn.textContent = "SAVE MY REKT PASS";
+            });
+        });
+
+        postXBtn.addEventListener("click", function () {
+            postXBtn.disabled = true;
+            postXBtn.classList.add("loading");
+            postXBtn.textContent = "Shilling";
+
+            const deadCoin = card.querySelector('.dead-coin-text').textContent;
+            const tweetText = encodeURIComponent(
+                `Just minted my TSSN after selling my kidney for $${deadCoin} 📉\n` +
+                `Signed it with a Cheeto in my mom's basement 🧀🖊️\n` +
+                `This ain’t KYC. It’s RUG-KNOW-YOUR-CT 🪖\n` +
+                `Mint yours 👉 crypto-trenches.com\n\n#TSSN #RugMeDaddy #DegenTillDeath`
+            );
+            const tweetUrl = `https://x.com/intent/post?text=${tweetText}`;
+
+            window.open(tweetUrl, "_blank");
+
+            setTimeout(() => {
+                postXBtn.disabled = false;
+                postXBtn.classList.remove("loading");
+                postXBtn.textContent = "SHILL ON 𝕏 🚀";
+            }, 500);
+        });
+
+
+        resetBtn.addEventListener("click", function () {
+            form.reset();
+            cardSection.classList.add("hidden");
+            cardContent.innerHTML = "";
+            themeText.textContent = "";
+            deadCoinText.textContent = "";
+            cardSignatureImage.src = "";
+            ctx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+            document.querySelectorAll(".error").forEach((el) => el.classList.remove("error"));
+        });
+
+        // Ticker messages
+        const messages = [
+            "🔥 DEGEN ALERT: Rugpull season is HERE! Mint your TSSN or get REKT! 🚨",
+            "🚫 NO TSSN? NO LIQUIDITY! HODLers without TSSN = exit liquidity for whales 🐳",
+            "🧠 CT INTEL: 99% of degens without TSSN got rugged. WAGMI only with TSSN! 💪",
+            "⚠️ PROTOCOL 69-X: Unverified degens will be yeeted to Fiatland. Get TSSN NOW! 😤"
+        ];
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        const tickerContent = document.getElementById('tickerContent');
+        const shuffledMessages = shuffleArray([...messages]);
+        shuffledMessages.concat(shuffledMessages).forEach(text => {
+            const span = document.createElement('span');
+            span.className = 'ticker-item';
+            span.innerText = text + ' 🚀💥';
+            tickerContent.appendChild(span);
+        });
+
+        updateLanguage("en");
+    </script>
+</body>
+</html>
